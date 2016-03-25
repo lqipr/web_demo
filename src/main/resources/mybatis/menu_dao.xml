@@ -1,0 +1,64 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lqipr.dao.MenuDao">
+    <sql id="common_select">
+        select
+        id,
+        code,
+        parent_code,
+        name,
+        value,
+        type,
+        create_time
+        from `menu`
+    </sql>
+    <sql id="common_where">
+        where 1=1
+        <if test="code != null and code != ''">
+            and code = #{code}
+        </if>
+    </sql>
+
+    <select id="get" resultType="menu" parameterType="int">
+        <include refid="common_select" />
+        where id = #{id}
+    </select>
+
+    <select id="queryList" resultType="menu" parameterType="Map">
+        <include refid="common_select" />
+        <include refid="common_where"/>
+    </select>
+
+    <insert id="insert" parameterType="menu" useGeneratedKeys="true" keyColumn="id" keyProperty = "id">
+        INSERT INTO menu
+        (
+        CODE,
+        parent_code,
+        NAME,
+        VALUE,
+        TYPE,
+        create_time
+        )
+        VALUES
+        (
+        #{code},
+        #{parentCode},
+        #{name},
+        #{value},
+        #{type},
+        now()
+        );
+    </insert>
+
+    <update id="update" parameterType="menu">
+        update `menu`
+        set CODE = #{code}, parent_code = #{parentCode}
+        , NAME = #{name}, VALUE = #{value}, TYPE = #{type}
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from `menu`
+        where id = #{id}
+    </delete>
+
+</mapper>

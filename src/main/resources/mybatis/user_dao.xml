@@ -1,0 +1,36 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lqipr.dao.UserDao">
+    <sql id="common_select">
+        select id, user_name, phone from `user`
+    </sql>
+    <sql id="common_where">
+        where 1=1
+        <if test="id > 0">
+            and id = #{id}
+        </if>
+        <if test="userName != null and userName != ''">
+            and user_name = #{userName}
+        </if>
+    </sql>
+
+    <select id="get" resultType="user" parameterType="int">
+        <include refid="common_select" />
+        where id = #{id}
+    </select>
+
+    <select id="queryUserPage" resultType="user" parameterType="Map">
+        <include refid="common_select" />
+        <include refid="common_where"/>
+    </select>
+
+    <insert id="insert" parameterType="user" useGeneratedKeys="true" keyColumn="id" keyProperty = "id">
+        insert into `user`(user_name, phone)
+        values(#{userName}, #{phone})
+    </insert>
+
+    <update id="update" parameterType="user">
+        update `user` set user_name = #{userName}, phone =#{phone}
+        where id = #{id}
+    </update>
+
+</mapper>
