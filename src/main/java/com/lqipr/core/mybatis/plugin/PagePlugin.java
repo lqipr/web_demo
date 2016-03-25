@@ -16,8 +16,6 @@ import java.util.Properties;
  * Mybatis查询分页
  * PageIntercept 适配此插件
  * PageThreadHelp 设置当前线程分页插件
- * ID方式分页必须带 where
- * 例:where 1=1
  * Created by lqipr on 2015/9/17.
  */
 @Intercepts({ @Signature(type = StatementHandler.class, method = "prepare", args = { Connection.class }) })

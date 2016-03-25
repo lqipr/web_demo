@@ -2,6 +2,7 @@ package com.lqipr.base;
 
 import com.lqipr.core.dao.DataSourceLoader;
 import com.lqipr.core.util.PropertiesUtil;
+import com.lqipr.service.UserService;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.PropertyConfigurator;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -63,23 +64,23 @@ public class WebConfig extends DataSourceLoader {
 
     public static void main(String[] args) {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(WebConfig.class);
-//        final UserService userService = applicationContext.getBean("userServiceImpl", UserService.class);
+        final UserService userService = applicationContext.getBean("userServiceImpl", UserService.class);
 
         //MYSQL 1966 868 837 821 776
         //UCP 888 122 123 118 132
 
-//        for (int i = 0; i < 5; i++) {
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    long l = System.currentTimeMillis();
-//                    for (int i = 0; i < 100; i++) {
-//                        System.out.println("------"+userService.get(1));
-//                    }
-//                    System.out.println("耗时："+(System.currentTimeMillis()-l));
-//                }
-//            }).run();
-//        }
+        for (int i = 0; i < 5; i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    long l = System.currentTimeMillis();
+                    for (int i = 0; i < 100; i++) {
+                        System.out.println("------"+userService.get(1));
+                    }
+                    System.out.println("耗时："+(System.currentTimeMillis()-l));
+                }
+            }).run();
+        }
     }
 
 }
