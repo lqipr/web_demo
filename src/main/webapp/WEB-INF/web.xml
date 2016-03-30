@@ -8,6 +8,15 @@
         </listener-class>
     </listener>
 
+    <context-param>
+        <param-name>resteasy.providers</param-name>
+        <param-value>com.lqipr.exception.WebExceptionMapper</param-value>
+    </context-param>
+    <context-param>
+        <param-name>resteasy.servlet.mapping.prefix</param-name>
+        <param-value>*.do</param-value>
+    </context-param>
+
     <!-- servlet -->
     <servlet>
         <servlet-name>spring</servlet-name>

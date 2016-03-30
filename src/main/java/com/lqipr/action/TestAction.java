@@ -1,6 +1,7 @@
 package com.lqipr.action;
 
 import com.alibaba.fastjson.JSONObject;
+import com.lqipr.exception.MyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +14,20 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping( "/test" )
 public class TestAction {
+
+    @ResponseBody
+    @RequestMapping("/list.do")
+    public String list(
+//            @RequestHeader("name")
+            String name)throws MyException {
+        if(name == null){
+            throw new RuntimeException("test runtime exception");
+        }
+
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        return json.toJSONString();
+    }
 
     @RequestMapping("/hello.do")
     public ModelAndView hello(){
@@ -31,14 +46,5 @@ public class TestAction {
         return "hello";
     }
 
-    @ResponseBody
-    @RequestMapping("/list.do")
-    public String list(
-//            @RequestHeader("name")
-            String name){
-        JSONObject json = new JSONObject();
-        json.put("name", name);
-        return json.toJSONString();
-    }
 
 }
