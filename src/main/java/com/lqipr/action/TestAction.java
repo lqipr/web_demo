@@ -3,23 +3,21 @@ package com.lqipr.action;
 import com.alibaba.fastjson.JSONObject;
 import com.lqipr.exception.MyException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
 /**
  * Created by lqipr on 2015/9/8.
  */
-
 @Controller
-@RequestMapping( "/test" )
+@Path("/test")
 public class TestAction {
 
-    @ResponseBody
-    @RequestMapping("/list.do")
-    public String list(
-//            @RequestHeader("name")
-            String name)throws MyException {
+    @GET
+    @Path(value = "/list")
+    public String list(@PathParam("name") String name)throws MyException {
         if(name == null){
             throw new RuntimeException("test runtime exception");
         }
@@ -29,22 +27,11 @@ public class TestAction {
         return json.toJSONString();
     }
 
-    @RequestMapping("/hello.do")
-    public ModelAndView hello(){
-        ModelAndView mav = new ModelAndView("hello");
-        return mav;
-    }
-
-    @RequestMapping("/hello2.do")
-    public ModelAndView hello2(){
-        ModelAndView mav = new ModelAndView("hello");
-        return mav;
-    }
-
-    @RequestMapping("/hello_str.do")
+    @GET
+    @Path(value = "/helloStr")
     public String helloStr(){
-        return "hello";
+        throw new RuntimeException("test runtime exception");
+//        return "hello";
     }
-
 
 }

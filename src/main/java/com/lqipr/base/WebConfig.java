@@ -34,6 +34,7 @@ public class WebConfig extends DataSourceLoader {
     public static void init() {
         try {
             Properties properties = PropertiesUtil.getProperties("properties/log4j.properties");
+            System.out.println("classpath:"+WebConfig.class.getResource(""));
             if (properties != null)
                 PropertyConfigurator.configure(properties);
         } catch (Exception e) {

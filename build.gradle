@@ -25,13 +25,15 @@ dependencies {
 
     /** J2EE **/
     compile 'org.springframework:spring-web:3.2.5.RELEASE'
-    compile 'org.springframework:spring-webmvc:3.2.5.RELEASE'
+//    compile 'org.springframework:spring-webmvc:3.2.5.RELEASE'
 
     /** Json **/
     compile 'com.alibaba:fastjson:1.2.5'
 
     /** Log **/
     compile 'log4j:log4j:1.2.17'
+    compile 'org.slf4j:slf4j-api:1.7.20'
+    compile 'org.slf4j:slf4j-log4j12:1.7.20'
 
     /** Common **/
     compile 'commons-pool:commons-pool:1.6'
@@ -44,6 +46,7 @@ dependencies {
 
     /** Resteasy **/
     compile 'org.jboss.resteasy:resteasy-jaxrs:3.0.16.Final'
+    compile 'org.jboss.resteasy:resteasy-spring:3.0.16.Final'
 
     compile fileTree(dir: 'src/main/webapp/WEB-INF/lib', include: '*.jar')
 
