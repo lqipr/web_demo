@@ -11,6 +11,7 @@ client/dist
 client/release
 common/dist
 common/release
+gradle
 build
 bin
 dist
@@ -21,3 +22,5 @@ release
 .project
 .gradle
 .settings
+gradlew
+gradlew.bat
