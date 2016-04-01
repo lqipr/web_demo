@@ -1,12 +1,16 @@
 package com.lqipr.action;
 
-import com.alibaba.fastjson.JSONObject;
-import com.lqipr.exception.MyException;
+import com.lqipr.core.util.ResponseUtil;
+import com.lqipr.po.User;
+import com.lqipr.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
+import java.util.List;
 
 /**
  * Created by lqipr on 2015/9/8.
@@ -15,23 +19,23 @@ import javax.ws.rs.PathParam;
 @Path("/test")
 public class TestAction {
 
+    @Autowired
+    UserService userService;
+
     @GET
-    @Path(value = "/list")
-    public String list(@PathParam("name") String name)throws MyException {
+    @Path(value = "/list/{id}")
+    public String list(@QueryParam("name") String name, @PathParam("id") int id) {
         if(name == null){
             throw new RuntimeException("test runtime exception");
         }
-
-        JSONObject json = new JSONObject();
-        json.put("name", name);
-        return json.toJSONString();
+        List<User> result = userService.getUserPageById(id, name, 0, 20);
+        return ResponseUtil.getResponseMessage(ResponseUtil.SUCCESS_STATUS, "成功", result);
     }
 
     @GET
-    @Path(value = "/helloStr")
-    public String helloStr(){
+    @Path(value = "/test_error")
+    public String testError(){
         throw new RuntimeException("test runtime exception");
-//        return "hello";
     }
 
 }

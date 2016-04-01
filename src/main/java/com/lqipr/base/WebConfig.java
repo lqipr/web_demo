@@ -1,12 +1,15 @@
 package com.lqipr.base;
 
 import com.lqipr.core.dao.DataSourceLoader;
+import com.lqipr.core.exception.ActionExceptionMapper;
 import com.lqipr.core.util.PropertiesUtil;
 import com.lqipr.service.UserService;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.PropertyConfigurator;
+import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
 import org.springframework.core.io.DefaultResourceLoader;
@@ -57,6 +60,11 @@ public class WebConfig extends DataSourceLoader {
         DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
         transactionManager.setDataSource(getDataSource("test"));
         return transactionManager;
+    }
+
+    @Autowired
+    public void setActionExceptionMapper(){
+        ResteasyProviderFactory.getInstance().register(new ActionExceptionMapper());
     }
 
     public DataSource getDataSource(String name) {

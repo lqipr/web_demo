@@ -41,6 +41,8 @@ public class UserSerivceTest {
     @Test
     public void testQueryId(){
         System.out.println(service.getUserPageById(0, "名字1", 0, 2));
+        System.out.println(service.getUserPageById(1, "", 0, 2));
+        System.out.println(service.getUserPageById(0, "", 0, 2));
     }
 
 
