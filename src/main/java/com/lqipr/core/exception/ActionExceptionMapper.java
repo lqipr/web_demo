@@ -10,6 +10,7 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 /**
+ * Action捕获所有Error
  * 必须基于 Rest easy
  * 1.xml配置
  * <context:component-scan base-package="com.lqipr.core.exception">
