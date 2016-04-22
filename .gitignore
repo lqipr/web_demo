@@ -16,7 +16,6 @@ build
 bin
 dist
 classes
-build
 release
 .classpath
 .project
@@ -24,3 +23,4 @@ release
 .settings
 gradlew
 gradlew.bat
+jk

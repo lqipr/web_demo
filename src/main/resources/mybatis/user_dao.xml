@@ -4,13 +4,14 @@
         select id, user_name, phone from `user`
     </sql>
     <sql id="common_where">
-        where 1=1
-        <if test="id > 0">
-            and id = #{id}
-        </if>
-        <if test="userName != null and userName != ''">
-            and user_name = #{userName}
-        </if>
+        <where>
+            <if test="id > 0">
+                and id = #{id}
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name = #{userName}
+            </if>
+        </where>
     </sql>
 
     <select id="get" resultType="user" parameterType="int">

@@ -1,0 +1,53 @@
+apply plugin: 'war'
+apply plugin: 'jetty'
+
+jettyRun{
+    httpPort 8080
+    reload "automatic"
+}
+
+task cleanBuild(type: Delete){
+    delete 'dist'
+}
+
+task copyProdResources(type: Copy) {
+    from 'build_config/prod'
+    into 'build/resources/main'
+}
+
+task copyTestResources(type: Copy) {
+    from 'build_config/test'
+    into 'build/resources/main'
+}
+
+task copyWar(type: Copy){
+    from 'build/libs'
+    into 'dist'
+}
+
+task rebuild << {
+    clean.execute()
+    compileJava.execute()
+    processResources.execute()
+}
+
+task releaseCommon << {
+    cleanBuild.execute()
+    war.execute()
+    copyWar.execute()
+}
+
+//测试环境war包
+task releaseTest << {
+    copyTestResources.execute()
+    releaseCommon.execute()
+}
+
+//生产环境war包
+task releaseProd << {
+    copyProdResources.execute()
+    releaseCommon.execute()
+}
+
+releaseTest.dependsOn rebuild
+releaseProd.dependsOn rebuild

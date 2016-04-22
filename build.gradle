@@ -1,10 +1,17 @@
 apply plugin: 'java'
 apply plugin: 'idea'
-apply plugin: 'eclipse'
-apply plugin: 'war'
 
 sourceCompatibility = 1.7
 version = '1.0'
+
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
 
 repositories {
     mavenCentral()
@@ -12,16 +19,21 @@ repositories {
 
 dependencies {
     /** Db **/
-    compile 'org.mybatis:mybatis:3.2.8'
-    compile 'org.mybatis:mybatis-spring:1.2.2'
-    compile 'mysql:mysql-connector-java:5.1.34'
+    compile('org.mybatis:mybatis:3.2.8',
+            'org.mybatis:mybatis-spring:1.2.2',
+            'mysql:mysql-connector-java:5.1.34')
 
     /** Spring **/
-    compile 'aopalliance:aopalliance:1.0'
-    compile 'org.aspectj:aspectjweaver:1.8.5'
-    compile 'org.springframework:spring-core:3.2.5.RELEASE'
-    compile 'org.springframework:spring-context:3.2.5.RELEASE'
-    compile 'org.springframework:spring-jdbc:3.2.5.RELEASE'
+    compile('aopalliance:aopalliance:1.0',
+            'org.aspectj:aspectjweaver:1.8.5',
+            'org.springframework:spring-core:3.2.5.RELEASE',
+            'org.springframework:spring-context:3.2.5.RELEASE',
+            'org.springframework:spring-jdbc:3.2.5.RELEASE')
+
+    /** Log **/
+    compile('log4j:log4j:1.2.17',
+            'org.slf4j:slf4j-api:1.7.20',
+            'org.slf4j:slf4j-log4j12:1.7.20')
 
     /** J2EE **/
     compile 'org.springframework:spring-web:3.2.5.RELEASE'
@@ -29,11 +41,6 @@ dependencies {
 
     /** Json **/
     compile 'com.alibaba:fastjson:1.2.5'
-
-    /** Log **/
-    compile 'log4j:log4j:1.2.17'
-    compile 'org.slf4j:slf4j-api:1.7.20'
-    compile 'org.slf4j:slf4j-log4j12:1.7.20'
 
     /** Common **/
     compile 'commons-pool:commons-pool:1.6'
@@ -48,7 +55,10 @@ dependencies {
     compile 'org.jboss.resteasy:resteasy-jaxrs:3.0.16.Final'
     compile 'org.jboss.resteasy:resteasy-spring:3.0.16.Final'
 
+    compileOnly 'javax.servlet:javax.servlet-api:3.1.0'
+
     compile fileTree(dir: 'src/main/webapp/WEB-INF/lib', include: '*.jar')
 
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
+apply from: 'commonWeb.gradle'

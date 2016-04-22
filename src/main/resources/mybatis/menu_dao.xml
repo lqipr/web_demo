@@ -12,10 +12,11 @@
         from `menu`
     </sql>
     <sql id="common_where">
-        where 1=1
-        <if test="code != null and code != ''">
-            and code = #{code}
-        </if>
+        <where>
+            <if test="code != null and code != ''">
+                and code = #{code}
+            </if>
+        </where>
     </sql>
 
     <select id="get" resultType="menu" parameterType="int">
